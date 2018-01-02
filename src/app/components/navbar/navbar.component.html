@@ -8,11 +8,11 @@
   </div>
 
   <div class="navbar-right">
-    <div class="dropdown">
+    <div class="dropdown" *ngIf="isLoggedIn">
       Hello
     </div>
 
-    <div class="auth">
+    <div class="auth" *ngIf="!isLoggedIn">
       <a href="#">Login</a>
       <a href="#">Sign Up</a>
     </div>
