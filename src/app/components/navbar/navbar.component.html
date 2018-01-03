@@ -14,7 +14,33 @@
 
     <div class="auth" *ngIf="!isLoggedIn">
       <button class="btn-register">Register</button>
-      <button class="btn-login">Login</button>
+      <button class="btn-login" (click)="openLoginModal()">Login</button>
+    </div>
+  </div>
+</div>
+
+<div class="ui mini modal" id="loginModal">
+  <i class="close icon"></i>
+  <div class="header">Login</div>
+  <div class="content">
+    <div class="ui form" [class.loading]="isLoading" [class.error]="hasError">
+      <div class="field">
+        <label for="username">Username:</label>
+        <input id="username" type="text" placeholder="john.doe" [(ngModel)]="user.username">
+      </div>
+      <div class="field">
+        <label for="password">Password:</label>
+        <input id="password" type="password" [(ngModel)]="user.password">
+      </div>
+      <div class="ui message error" *ngIf="hasError">
+        <div class="header">Login Error</div>
+        <p>{{errorMessage}}</p>
+      </div>
+      <br>
+      <div class="ui icon button" (click)="login()">
+        Login
+        <i class="sign in icon"></i>
+      </div>
     </div>
   </div>
 </div>
