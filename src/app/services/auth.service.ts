@@ -30,4 +30,11 @@ export class AuthService {
   retrieveToken(): string {
     return localStorage.getItem(this.userTokenKey);
   }
+
+  isLoggedIn(): boolean {
+    if (this.retrieveToken()) {
+      return true;
+    }
+    return false;
+  }
 }

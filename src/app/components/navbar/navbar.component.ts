@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {tick} from '@angular/core/testing';
 
@@ -11,7 +11,7 @@ declare var jQuery: any;
   providers: [AuthService]
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   $: any;
   user = { username: '', password: '' };
   isLoggedIn: boolean;
@@ -22,6 +22,10 @@ export class NavbarComponent {
   constructor(
     private auth: AuthService) {
     this.$ = jQuery;
+  }
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.auth.isLoggedIn();
   }
 
   openLoginModal(): void {
@@ -38,12 +42,25 @@ export class NavbarComponent {
 
     this.auth.login(this.user)
       .subscribe((res) => {
-        console.log(res);
+        this.isLoading = false;
+        this.hasError = false;
+
+        // persist login details
+        this.auth.saveToken(res.token);
+        this.auth.saveUser(res.user);
+
+        // set logged in param
+        this.isLoggedIn = true;
+
+        // close the modal
+        this.$('#loginModal').modal('hide');
+
+        // clear the user binding modal
+        this.user = { username: '', password: '' };
       }, (err) => {
-        console.log(err.message);
         this.isLoading = false;
         this.hasError = true;
-        this.errorMessage = err.message;
+        this.errorMessage = err.error.message || err.message;
       });
   }
 }
