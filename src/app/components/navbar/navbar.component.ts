@@ -14,6 +14,7 @@ declare var jQuery: any;
 export class NavbarComponent implements OnInit {
   $: any;
   user = { username: '', password: '' };
+  newUser = { username: '', password: '', email: '', passwordAgain: '' };
   isLoggedIn: boolean;
   isLoading: boolean;
   hasError: boolean;
@@ -30,6 +31,14 @@ export class NavbarComponent implements OnInit {
 
   openLoginModal(): void {
     this.$('#loginModal')
+      .modal({
+        closable: false
+      })
+      .modal('show');
+  }
+
+  openRegisterModal(): void {
+    this.$('#registerModal')
       .modal({
         closable: false
       })

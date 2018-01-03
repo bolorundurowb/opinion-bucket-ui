@@ -1,3 +1,4 @@
+<!--Navbar-->
 <div class="navbar">
   <div class="navbar-left">
     <img src="./../../../assets/logos/logo-white-teal.png">
@@ -13,24 +14,25 @@
     </div>
 
     <div class="auth" *ngIf="!isLoggedIn">
-      <button class="btn-register">Register</button>
+      <button class="btn-register" (click)="openRegisterModal()">Register</button>
       <button class="btn-login" (click)="openLoginModal()">Login</button>
     </div>
   </div>
 </div>
 
+<!--Login Modal-->
 <div class="ui mini modal" id="loginModal">
   <i class="close icon"></i>
   <div class="header">Login</div>
   <div class="content">
     <div class="ui form" [class.loading]="isLoading" [class.error]="hasError">
       <div class="field">
-        <label for="username">Username:</label>
-        <input id="username" type="text" placeholder="john.doe" [(ngModel)]="user.username">
+        <label>Username:</label>
+        <input name="username" type="text" placeholder="john.doe" [(ngModel)]="user.username">
       </div>
       <div class="field">
-        <label for="password">Password:</label>
-        <input id="password" type="password" [(ngModel)]="user.password">
+        <label>Password:</label>
+        <input name="password" type="password" placeholder="password" [(ngModel)]="user.password">
       </div>
       <div class="ui message error" *ngIf="hasError">
         <div class="header">Login Error</div>
@@ -39,6 +41,41 @@
       <br>
       <div class="ui icon button" (click)="login()">
         Login
+        <i class="sign in icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Register Modal-->
+<div class="ui mini modal" id="registerModal">
+  <i class="close icon"></i>
+  <div class="header">Register</div>
+  <div class="content">
+    <div class="ui form" [class.loading]="isLoading" [class.error]="hasError">
+      <div class="field">
+        <label>Username:</label>
+        <input name="username" type="text" placeholder="john.doe" [(ngModel)]="newUser.username">
+      </div>
+      <div class="field">
+        <label>Email:</label>
+        <input name="email" type="email" placeholder="john@doe.org" [(ngModel)]="newUser.email">
+      </div>
+      <div class="field">
+        <label>Password:</label>
+        <input name="password" type="password" placeholder="password" [(ngModel)]="newUser.password">
+      </div>
+      <div class="field">
+        <label>Password Again:</label>
+        <input name="password" type="password" placeholder="password again" [(ngModel)]="newUser.passwordAgain">
+      </div>
+      <div class="ui message error" *ngIf="hasError">
+        <div class="header">Login Error</div>
+        <p>{{errorMessage}}</p>
+      </div>
+      <br>
+      <div class="ui green icon button" (click)="login()">
+        Register
         <i class="sign in icon"></i>
       </div>
     </div>
