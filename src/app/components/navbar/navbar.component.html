@@ -19,17 +19,18 @@
   </div>
 </div>
 
-<ng-template let-context let-modal="modal" #modalTemplate>
+<div class="ui mini modal" id="loginModal">
+  <i class="close icon"></i>
   <div class="header">Login</div>
   <div class="content">
     <div class="ui form" [class.loading]="isLoading">
       <div class="field">
-        <label>Username/Email:</label>
-        <input type="text" placeholder="john.doe/john@doe.org">
+        <label for="username">Username:</label>
+        <input id="username" type="text" placeholder="john.doe" [(ngModel)]="user.username">
       </div>
       <div class="field">
-        <label>Password:</label>
-        <input type="password">
+        <label for="password">Password:</label>
+        <input id="password" type="password" [(ngModel)]="user.password">
       </div>
       <div class="ui message error" *ngIf="errorMessage">
         <div class="header">Login Error</div>
@@ -42,4 +43,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</div>

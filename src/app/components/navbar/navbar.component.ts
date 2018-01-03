@@ -1,34 +1,43 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SuiModalService, TemplateModalConfig, ModalTemplate} from 'ng2-semantic-ui';
-import {IContext} from '../../interfaces/IContext';
+import {Component} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  providers: [AuthService]
 })
 
-export class NavbarComponent implements OnInit {
-  @ViewChild('modalTemplate')
-  public modalTemplate: ModalTemplate<IContext, string, string>;
+export class NavbarComponent {
+  $: any;
+  user = { username: '', password: '' };
   isLoggedIn: boolean;
   isLoading: boolean;
   errorMessage: string;
 
-  constructor(private modalService: SuiModalService) { }
-
-  ngOnInit() {
+  constructor(
+    private auth: AuthService) {
+    this.$ = jQuery;
   }
 
   openLoginModal(): void {
-    const config = new TemplateModalConfig<IContext, string, string>(this.modalTemplate);
-
-    this.modalService
-      .open(config);
+    this.$('#loginModal')
+      .modal({
+        closable: false
+      })
+      .modal('show');
   }
 
   login(): void {
     this.isLoading = true;
-    this.errorMessage = 'jjwekleew';
+
+    this.auth.login(this.user)
+      .subscribe((res) => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      });
   }
 }
