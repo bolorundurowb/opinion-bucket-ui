@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://opinion-bucket-api-staging.herokuapp.com/'
+  apiUrl: 'http://opinion-bucket-api-staging.herokuapp.com/api/v1/'
 };
