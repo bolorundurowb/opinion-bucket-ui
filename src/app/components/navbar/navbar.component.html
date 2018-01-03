@@ -19,13 +19,16 @@
   </div>
 </div>
 
-<sui-modal [isClosable]="true" (dismissed)="alert($event)" #modal>
-  <div class="header">Example</div>
+<sui-modal [isClosable]="true" #modal>
+  <div class="header">Login</div>
   <div class="content">
     <p>Modal content</p>
   </div>
   <div class="actions">
-    <button class="ui red button" (click)="modal.deny()">Cancel</button>
-    <button class="ui green button" (click)="modal.approve('done')" autofocus>OK</button>
+    <button class="ui black deny button" (click)="modal.deny()">Close</button>
+    <button class="ui teal icon button" (click)="modal.approve('done')" autofocus>
+      Login
+      <i class="sign in icon"></i>
+    </button>
   </div>
 </sui-modal>
