@@ -1,0 +1,20 @@
+<div class="navbar">
+  <div class="navbar-left">
+    <img src="./../../../assets/logos/logo-white-teal.png">
+  </div>
+
+  <div class="header">
+    Opinion Bucket
+  </div>
+
+  <div class="navbar-right">
+    <div class="dropdown" *ngIf="isLoggedIn">
+      Hello
+    </div>
+
+    <div class="auth" *ngIf="!isLoggedIn">
+      <button class="btn-register">Register</button>
+      <button class="btn-login">Login</button>
+    </div>
+  </div>
+</div>
