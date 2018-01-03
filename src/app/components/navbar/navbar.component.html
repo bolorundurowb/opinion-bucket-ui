@@ -14,21 +14,32 @@
 
     <div class="auth" *ngIf="!isLoggedIn">
       <button class="btn-register">Register</button>
-      <button class="btn-login">Login</button>
+      <button class="btn-login" (click)="openLoginModal()">Login</button>
     </div>
   </div>
 </div>
 
-<sui-modal [isClosable]="true" #modal>
+<ng-template let-context let-modal="modal" #modalTemplate>
   <div class="header">Login</div>
   <div class="content">
-    <p>Modal content</p>
+    <div class="ui form" [class.loading]="isLoading">
+      <div class="field">
+        <label>Username/Email:</label>
+        <input type="text" placeholder="john.doe/john@doe.org">
+      </div>
+      <div class="field">
+        <label>Password:</label>
+        <input type="password">
+      </div>
+      <div class="ui message error" *ngIf="errorMessage">
+        <div class="header">Login Error</div>
+        <p>{{errorMessage}}</p>
+      </div>
+      <br>
+      <div class="ui icon button" (click)="login()">
+        Login
+        <i class="sign in icon"></i>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <button class="ui black deny button" (click)="modal.deny()">Close</button>
-    <button class="ui teal icon button" (click)="modal.approve('done')" autofocus>
-      Login
-      <i class="sign in icon"></i>
-    </button>
-  </div>
-</sui-modal>
+</ng-template>
