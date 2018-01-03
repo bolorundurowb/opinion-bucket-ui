@@ -40,8 +40,35 @@
     }
 
     .auth {
-      a {
-        width: 50px;
+      .btn-login {
+        border: $main-color 1px solid;
+        width: 90px;
+        height: 45px;
+        color: $main-color;
+        margin: 5px;
+        border-radius: 5px;
+        font-family: $secondary-font;
+      }
+
+      .btn-login:hover {
+        background-color: $main-color;
+        color: white;
+      }
+
+      .btn-register {
+        width: 90px;
+        height: 45px;
+        color: white;
+        margin: 5px;
+        border-radius: 5px;
+        background-color: $main-color;
+        font-family: $secondary-font;
+      }
+
+      .btn-register:hover {
+        color: $main-color;
+        border: $main-color 1px solid;
+        background-color: white;
       }
     }
   }
