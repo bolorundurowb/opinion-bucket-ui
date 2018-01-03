@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {tick} from '@angular/core/testing';
 
 declare var jQuery: any;
 
@@ -15,6 +16,7 @@ export class NavbarComponent {
   user = { username: '', password: '' };
   isLoggedIn: boolean;
   isLoading: boolean;
+  hasError: boolean;
   errorMessage: string;
 
   constructor(
@@ -32,12 +34,16 @@ export class NavbarComponent {
 
   login(): void {
     this.isLoading = true;
+    this.hasError = false;
 
     this.auth.login(this.user)
       .subscribe((res) => {
         console.log(res);
       }, (err) => {
-        console.log(err);
+        console.log(err.message);
+        this.isLoading = false;
+        this.hasError = true;
+        this.errorMessage = err.message;
       });
   }
 }
