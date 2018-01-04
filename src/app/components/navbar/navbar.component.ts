@@ -14,6 +14,7 @@ declare var jQuery: any;
 export class NavbarComponent implements OnInit {
   $: any;
   user = { username: '', password: '' };
+  newUser = { username: '', password: '', email: '', passwordAgain: '' };
   isLoggedIn: boolean;
   isLoading: boolean;
   hasError: boolean;
@@ -30,6 +31,14 @@ export class NavbarComponent implements OnInit {
 
   openLoginModal(): void {
     this.$('#loginModal')
+      .modal({
+        closable: false
+      })
+      .modal('show');
+  }
+
+  openRegisterModal(): void {
+    this.$('#registerModal')
       .modal({
         closable: false
       })
@@ -62,5 +71,33 @@ export class NavbarComponent implements OnInit {
         this.hasError = true;
         this.errorMessage = err.error.message || err.message;
       });
+  }
+
+  register(): void {
+    this.isLoading = true;
+    this.hasError = false;
+
+    this.auth.register(this.newUser)
+      .subscribe((res) => {
+        this.isLoading = false;
+        this.hasError = false;
+
+        // persist login details
+        this.auth.saveToken(res.token);
+        this.auth.saveUser(res.user);
+
+        // set logged in param
+        this.isLoggedIn = true;
+
+        // close the modal
+        this.$('#registerModal').modal('hide');
+
+        // clear the user binding modal
+        this.newUser = { username: '', password: '', email: '', passwordAgain: '' };
+      }, (err) => {
+        this.isLoading = false;
+        this.hasError = true;
+        this.errorMessage = err.error.message || err.message;
+      })
   }
 }
