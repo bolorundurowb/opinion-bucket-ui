@@ -70,13 +70,13 @@
         <input name="password" type="password" placeholder="password again" [(ngModel)]="newUser.passwordAgain">
       </div>
       <div class="ui message error" *ngIf="hasError">
-        <div class="header">Login Error</div>
+        <div class="header">Signup Error</div>
         <p>{{errorMessage}}</p>
       </div>
       <br>
       <div class="ui green icon button" (click)="register()">
         Register
-        <i class="sign in icon"></i>
+        <i class="add user icon"></i>
       </div>
     </div>
   </div>
