@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {tick} from '@angular/core/testing';
 
 declare var jQuery: any;
 
@@ -11,7 +10,7 @@ declare var jQuery: any;
   providers: [AuthService]
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
   $: any;
   user = { username: '', password: '' };
   newUser = { username: '', password: '', email: '', passwordAgain: '' };
@@ -20,6 +19,10 @@ export class NavbarComponent implements OnInit {
   hasError: boolean;
   errorMessage: string;
 
+  // for the drop down
+  avatarUrl: string;
+  displayName: string;
+
   constructor(
     private auth: AuthService) {
     this.$ = jQuery;
@@ -27,6 +30,33 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isLoggedIn();
+    if (this.isLoggedIn) {
+      const human = this.auth.retriveUser();
+
+      // avatar
+      this.avatarUrl = human.profilePhoto;
+      if (!this.avatarUrl) {
+        if (human.gender === 'Decline') {
+          this.avatarUrl = './../../../assets/avatars/decline.jpg';
+        } else if (human.gender === 'Female') {
+          this.avatarUrl = './../../../assets/avatars/female.jpg';
+        } else if (human.gender === 'Male') {
+          this.avatarUrl = './../../../assets/avatars/male.jpg';
+        }
+      }
+
+      // display name
+      if (human.firstName && human.lastName) {
+        this.displayName = `${human.firstName} ${human.lastName}`;
+      } else {
+        this.displayName = human.username;
+      }
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // initialize dropdowm
+    this.$('#dropdown').dropdown();
   }
 
   openLoginModal(): void {
