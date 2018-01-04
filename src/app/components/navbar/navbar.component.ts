@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {tick} from '@angular/core/testing';
 
 declare var jQuery: any;
 
@@ -20,7 +19,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   hasError: boolean;
   errorMessage: string;
 
-  // for the dropdown
+  // for the drop down
   avatarUrl: string;
   displayName: string;
 
