@@ -14,6 +14,10 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}signIn`, payload);
   }
 
+  register(payload: {username: string, password: string, passwordAgain: string, email: string}): Observable<any> {
+    return this.http.post(`${environment.apiUrl}signUp`, payload);
+  }
+
   saveUser(user: any): void {
     localStorage.setItem(this.userKey, JSON.stringify(user));
   }
