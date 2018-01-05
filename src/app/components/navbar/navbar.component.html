@@ -1,0 +1,108 @@
+<!--Navbar-->
+<div class="navbar">
+  <div class="navbar-left">
+    <img src="./../../../assets/logos/logo-white-teal.png">
+  </div>
+
+  <div class="page-header">
+    Opinion Bucket
+  </div>
+
+  <div class="navbar-right">
+    <!--Drop down for logged in users-->
+    <div class="ui pointing dropdown" id="dropdown">
+      <div class="dropdown-header">
+        <span><i class="dropdown icon"></i></span>
+        <img class="ui user-profile-photo circular image" [src]="avatarUrl">
+      </div>
+      <div class="menu">
+        <div class="header">{{displayName}}</div>
+        <div class="item">
+          <i class="user icon"></i>
+          Profile
+        </div>
+        <div class="item">
+          <i class="newspaper icon"></i>
+          Contributions
+        </div>
+        <div class="item">
+          <i class="settings icon"></i>
+          Settings
+        </div>
+        <div class="ui divider"></div>
+        <div class="item" (click)="logOut()">
+          <i class="sign out icon"></i>
+          Logout
+        </div>
+      </div>
+    </div>
+
+    <!--Auth buttons for unsigned in users-->
+    <div class="auth" *ngIf="!isLoggedIn">
+      <button class="btn-register" (click)="openRegisterModal()">Register</button>
+      <button class="btn-login" (click)="openLoginModal()">Login</button>
+    </div>
+  </div>
+</div>
+
+<!--Login Modal-->
+<div class="ui mini modal" id="loginModal">
+  <i class="close icon"></i>
+  <div class="header">Login</div>
+  <div class="content">
+    <div class="ui form" [class.loading]="isLoading" [class.error]="hasError">
+      <div class="field">
+        <label>Username:</label>
+        <input name="username" type="text" placeholder="john.doe" [(ngModel)]="user.username">
+      </div>
+      <div class="field">
+        <label>Password:</label>
+        <input name="password" type="password" placeholder="password" [(ngModel)]="user.password">
+      </div>
+      <div class="ui message error" *ngIf="hasError">
+        <div class="header">Login Error</div>
+        <p>{{errorMessage}}</p>
+      </div>
+      <br>
+      <div class="ui icon button" (click)="login()">
+        Login
+        <i class="sign in icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Register Modal-->
+<div class="ui mini modal" id="registerModal">
+  <i class="close icon"></i>
+  <div class="header">Register</div>
+  <div class="content">
+    <div class="ui form" [class.loading]="isLoading" [class.error]="hasError">
+      <div class="field">
+        <label>Username:</label>
+        <input name="username" type="text" placeholder="john.doe" [(ngModel)]="newUser.username">
+      </div>
+      <div class="field">
+        <label>Email:</label>
+        <input name="email" type="email" placeholder="john@doe.org" [(ngModel)]="newUser.email">
+      </div>
+      <div class="field">
+        <label>Password:</label>
+        <input name="password" type="password" placeholder="password" [(ngModel)]="newUser.password">
+      </div>
+      <div class="field">
+        <label>Password Again:</label>
+        <input name="password" type="password" placeholder="password again" [(ngModel)]="newUser.passwordAgain">
+      </div>
+      <div class="ui message error" *ngIf="hasError">
+        <div class="header">Signup Error</div>
+        <p>{{errorMessage}}</p>
+      </div>
+      <br>
+      <div class="ui green icon button" (click)="register()">
+        Register
+        <i class="add user icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
