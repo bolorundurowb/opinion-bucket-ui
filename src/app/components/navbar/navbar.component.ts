@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isLoggedIn();
     if (this.isLoggedIn) {
-      const human = this.auth.retriveUser();
+      const human = this.auth.retrieveUser();
 
       // avatar
       this.avatarUrl = human.profilePhoto;
@@ -51,6 +51,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       } else {
         this.displayName = human.username;
       }
+    } else {
+      // hide the dropdown if not logged in
+      this.$('#dropdown').hide();
     }
   }
 
@@ -94,6 +97,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         // close the modal
         this.$('#loginModal').modal('hide');
 
+        // show the dropdown
+        this.$('#dropdown').show();
+
         // clear the user binding modal
         this.user = { username: '', password: '' };
       }, (err) => {
@@ -122,6 +128,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         // close the modal
         this.$('#registerModal').modal('hide');
 
+        // show the dropdown
+        this.$('#dropdown').show();
+
         // clear the user binding modal
         this.newUser = { username: '', password: '', email: '', passwordAgain: '' };
       }, (err) => {
@@ -129,5 +138,16 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         this.hasError = true;
         this.errorMessage = err.error.message || err.message;
       })
+  }
+
+  logOut(): void {
+    // hide the dropdown
+    this.$('#dropdown').hide();
+
+    // show the login controls
+    this.isLoggedIn = false;
+
+    // clear saved user data
+    this.auth.clearData();
   }
 }

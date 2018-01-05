@@ -26,13 +26,17 @@ export class AuthService {
     localStorage.setItem(this.userTokenKey, token);
   }
 
-  retriveUser(): any {
+  retrieveUser(): any {
     const retrievedObject = localStorage.getItem(this.userKey);
     return JSON.parse(retrievedObject);
   }
 
   retrieveToken(): string {
     return localStorage.getItem(this.userTokenKey);
+  }
+
+  clearData(): void {
+    localStorage.clear();
   }
 
   isLoggedIn(): boolean {

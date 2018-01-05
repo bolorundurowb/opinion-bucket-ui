@@ -10,7 +10,7 @@
 
   <div class="navbar-right">
     <!--Drop down for logged in users-->
-    <div class="ui pointing dropdown" *ngIf="isLoggedIn" id="dropdown">
+    <div class="ui pointing dropdown" id="dropdown">
       <div class="dropdown-header">
         <span><i class="dropdown icon"></i></span>
         <img class="ui user-profile-photo circular image" [src]="avatarUrl">
@@ -30,7 +30,7 @@
           Settings
         </div>
         <div class="ui divider"></div>
-        <div class="item">
+        <div class="item" (click)="logOut()">
           <i class="sign out icon"></i>
           Logout
         </div>
