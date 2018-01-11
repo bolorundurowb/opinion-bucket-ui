@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-topic-list',
@@ -6,6 +6,12 @@ import {Component} from '@angular/core';
   styleUrls: ['./topic-list.component.scss']
 })
 
-export class TopicListComponent {
+export class TopicListComponent implements OnInit {
+  isLoading: boolean
 
+  constructor() {}
+
+  ngOnInit(): void {
+    this.isLoading = true;
+  }
 }
