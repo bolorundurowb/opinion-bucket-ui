@@ -23,9 +23,14 @@ export class TopicListComponent implements OnInit {
     this.topicService.getAll()
       .subscribe((res) => {
         this.isLoading = false;
+
+        // display topics
         this.topics = res;
       }, (err) => {
         this.hasError = true;
+        this.isLoading = false;
+
+        // display the error message
         this.errorMessage = err.error.message || err.message;
       });
   }
