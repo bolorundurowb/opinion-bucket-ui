@@ -17,4 +17,24 @@
       <p>We're fetching topics for you.</p>
     </div>
   </div>
+
+  <div class="ui divided items">
+    <div class="item" *ngFor="let topic of topics">
+      <div class="content">
+        <a class="header">{{topic.title}}</a>
+        <div class="meta">
+          <span class="cinema">{{topic.date | date: 'medium'}}</span>
+        </div>
+        <div class="description">
+          <p>{{topic.content | slice:0:600}} ...</p>
+        </div>
+        <div class="extra">
+          <div class="ui label" *ngFor="let category of topic.categories">
+            <i class="tag icon"></i>
+            {{category}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
