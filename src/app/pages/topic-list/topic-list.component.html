@@ -1,3 +1,20 @@
 <div class="container">
-  <div class="ui active centered inline loader" *ngIf="isLoading"></div>
+  <div class="ui icon red message" *ngIf="hasError">
+    <div class="content">
+      <div class="header">
+        Sorry an error occurred.
+      </div>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <div class="ui icon message" *ngIf="isLoading">
+    <i class="notched circle loading icon"></i>
+    <div class="content">
+      <div class="header">
+        Just one second
+      </div>
+      <p>We're fetching topics for you.</p>
+    </div>
+  </div>
 </div>
