@@ -20,7 +20,7 @@ export class TopicListComponent implements OnInit {
     this.hasError = false;
     this.isLoading = true;
 
-    this.topicService.getAll()
+    this.topicService.getAll(20, 0)
       .subscribe((res) => {
         this.isLoading = false;
 
