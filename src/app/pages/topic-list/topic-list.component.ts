@@ -14,6 +14,10 @@ export class TopicListComponent implements OnInit {
   hasError: boolean;
   errorMessage: string;
 
+  // pagination data
+  numOfTailors: number;
+  maxSize = 5;
+
   constructor(private topicService: TopicsService) {}
 
   ngOnInit(): void {
@@ -33,5 +37,9 @@ export class TopicListComponent implements OnInit {
         // display the error message
         this.errorMessage = err.error.message || err.message;
       });
+  }
+
+  selectedPage(event): void {
+    console.log(event);
   }
 }
