@@ -50,6 +50,17 @@ export class TopicListComponent implements OnInit {
   }
 
   filterChanged(event) {
-    console.log(event);
+    // make api call
+    this.topicService.getByCategories(event)
+      .subscribe((res) => {
+        // display topics
+        this.allTopics = res;
+      }, (err) => {
+        this.hasError = true;
+        this.isLoading = false;
+
+        // display the error message
+        this.errorMessage = err.error.message || err.message;
+      });
   }
 }
