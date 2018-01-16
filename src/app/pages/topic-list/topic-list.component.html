@@ -18,23 +18,25 @@
     </div>
   </div>
 
-  <div class="ui floating dropdown labeled icon button" suiDropdown>
-    <i class="filter icon"></i>
-    <span class="text">Filter Categories</span>
-    <div class="menu" suiDropdownMenu>
-      <div class="divider"></div>
-      <div class="header">
-        <i class="tags icon"></i>
-        By Tag
-      </div>
-      <div class="scrolling menu">
-        <div class="item" *ngFor="let category of categories">
-          <div class="ui teal empty circular label"></div>
-          {{category.title}}
-        </div>
-      </div>
+  <sui-select class="floating labeled icon button"
+              icon="filter"
+              [options]="categories"
+              labelField="title"
+              valueField="_id"
+              [isSearchable]="false"
+              placeholder="Select Filter"
+              #filterSelect
+              (selectedOptionChange)="filterChanged($event)">
+    <div class="header">
+      <i class="tags icon"></i>
+      Filter by Category
     </div>
-  </div>
+
+    <sui-select-option
+      [value]="category"
+      *ngFor="let category of filterSelect.filteredOptions">
+    </sui-select-option>
+  </sui-select>
 
   <div class="ui divided items">
     <div class="item" *ngFor="let topic of allTopics">

@@ -43,6 +43,13 @@ export class TopicListComponent implements OnInit {
     this.categoriesService.getAll()
       .subscribe((res) => {
         this.categories = res;
+
+        // add the 'all' option
+        this.categories.unshift({ _id: '', title: 'All' })
       });
+  }
+
+  filterChanged(event) {
+    console.log(event);
   }
 }

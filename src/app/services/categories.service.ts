@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 export class CategoriesService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any> {
+  getAll(): Observable<Array<any>> {
     return this.http.get(`${environment.apiUrl}categories`);
   }
 }
