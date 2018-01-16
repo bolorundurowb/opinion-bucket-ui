@@ -10,7 +10,7 @@ declare var jQuery: any;
   providers: [AuthService]
 })
 
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements OnInit {
   $: any;
   user = { username: '', password: '' };
   newUser = { username: '', password: '', email: '', passwordAgain: '' };
@@ -51,15 +51,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       } else {
         this.displayName = human.username;
       }
-    } else {
-      // hide the dropdown if not logged in
-      this.$('#dropdown').hide();
     }
-  }
-
-  ngAfterViewInit(): void {
-    // initialize dropdowm
-    this.$('#dropdown').dropdown();
   }
 
   openLoginModal(): void {
@@ -128,9 +120,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         // close the modal
         this.$('#registerModal').modal('hide');
 
-        // show the dropdown
-        this.$('#dropdown').show();
-
         // clear the user binding modal
         this.newUser = { username: '', password: '', email: '', passwordAgain: '' };
       }, (err) => {
@@ -141,9 +130,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   logOut(): void {
-    // hide the dropdown
-    this.$('#dropdown').hide();
-
     // show the login controls
     this.isLoggedIn = false;
 
