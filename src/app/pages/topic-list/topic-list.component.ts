@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TopicsService} from '../../services/topics.service';
 
 @Component({
@@ -9,6 +9,7 @@ import {TopicsService} from '../../services/topics.service';
 })
 
 export class TopicListComponent implements OnInit {
+  $: any;
   isLoading: boolean;
   topics: Array<any>;
   hasError: boolean;
