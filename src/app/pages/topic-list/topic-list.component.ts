@@ -10,13 +10,17 @@ import {TopicsService} from '../../services/topics.service';
 
 export class TopicListComponent implements OnInit {
   isLoading: boolean;
-  topics: Array<any>;
   hasError: boolean;
   errorMessage: string;
 
+  // topic data
+  allTopics: Array<any> = [];
+  topicsToDisplay: Array<any> = [];
+
   // pagination data
-  numOfTailors: number;
+  numOfTopics: number;
   maxSize = 5;
+  pageSize = 10;
 
   constructor(private topicService: TopicsService) {}
 
@@ -29,7 +33,11 @@ export class TopicListComponent implements OnInit {
         this.isLoading = false;
 
         // display topics
-        this.topics = res;
+        this.allTopics = res;
+        this.topicsToDisplay = this.allTopics.slice(0, this.pageSize);
+
+        // set the topics length
+        this.numOfTopics = res.length;
       }, (err) => {
         this.hasError = true;
         this.isLoading = false;
@@ -40,6 +48,9 @@ export class TopicListComponent implements OnInit {
   }
 
   selectedPage(event): void {
-    console.log(event);
+    const index = (event - 1) * this.pageSize;
+
+    // set the new data to be displayed
+    this.topicsToDisplay = this.allTopics.slice(index, index + this.pageSize);
   }
 }

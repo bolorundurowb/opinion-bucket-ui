@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {SuiModule} from 'ng2-semantic-ui';
 
 // components
 import { AppComponent } from './app.component';
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}
-    )
+    ),
+    SuiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
