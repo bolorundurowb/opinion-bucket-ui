@@ -7,11 +7,7 @@ import {environment} from '../../environments/environment';
 export class TopicsService {
   constructor(private http: HttpClient) {}
 
-  getAll(limit: number, offset: number): Observable<any> {
-    if (limit && offset) {
-      return this.http.get(`${environment.apiUrl}topics?limit=${limit}&offset=${offset}&order=date`);
-    } else {
-      return this.http.get(`${environment.apiUrl}topics`);
-    }
+  getAll(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}topics`);
   }
 }
