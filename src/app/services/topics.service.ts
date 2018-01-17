@@ -7,7 +7,11 @@ import {environment} from '../../environments/environment';
 export class TopicsService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any> {
+  getAll(): Observable<Array<any>> {
     return this.http.get(`${environment.apiUrl}topics`);
+  }
+
+  getByCategories(catId: string): Observable<Array<any>> {
+    return this.http.get(`${environment.apiUrl}topics?category=${catId}`);
   }
 }

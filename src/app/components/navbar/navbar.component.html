@@ -10,12 +10,12 @@
 
   <div class="navbar-right">
     <!--Drop down for logged in users-->
-    <div class="ui pointing dropdown" id="dropdown">
+    <div class="ui pointing dropdown" suiDropdown *ngIf="isLoggedIn">
       <div class="dropdown-header">
         <span><i class="dropdown icon"></i></span>
         <img class="ui user-profile-photo circular image" [src]="avatarUrl">
       </div>
-      <div class="menu">
+      <div class="menu" suiDropdownMenu>
         <div class="header">{{displayName}}</div>
         <div class="item">
           <i class="user icon"></i>
