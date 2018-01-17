@@ -67,6 +67,7 @@ export class TopicListComponent implements OnInit {
       .subscribe((res) => {
         // display topics
         this.allTopics = res;
+        this.topicsToDisplay = this.allTopics.slice(0, this.pageSize);
       }, (err) => {
         this.hasError = true;
         this.isLoading = false;
