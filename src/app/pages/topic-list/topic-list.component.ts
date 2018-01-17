@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TopicsService} from '../../services/topics.service';
+import {CategoriesService} from '../../services/categories.service';
 
 @Component({
   selector: 'app-topic-list',
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.scss'],
-  providers: [TopicsService]
+  providers: [TopicsService, CategoriesService]
 })
 
 export class TopicListComponent implements OnInit {
@@ -22,12 +23,16 @@ export class TopicListComponent implements OnInit {
   maxSize = 5;
   pageSize = 10;
 
-  constructor(private topicService: TopicsService) {}
+  // category data
+  categories: Array<any> = [];
+
+  constructor(private topicService: TopicsService, private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
     this.hasError = false;
     this.isLoading = true;
 
+    // retrieve topics
     this.topicService.getAll()
       .subscribe((res) => {
         this.isLoading = false;
@@ -38,6 +43,30 @@ export class TopicListComponent implements OnInit {
 
         // set the topics length
         this.numOfTopics = res.length;
+      }, (err) => {
+        this.hasError = true;
+        this.isLoading = false;
+
+        // display the error message
+        this.errorMessage = err.error.message || err.message;
+      });
+
+    // retrieve the categories
+    this.categoriesService.getAll()
+      .subscribe((res) => {
+        this.categories = res;
+
+        // add the 'all' option
+        this.categories.unshift({ _id: '', title: 'All' })
+      });
+  }
+
+  filterChanged(event) {
+    // make api call
+    this.topicService.getByCategories(event)
+      .subscribe((res) => {
+        // display topics
+        this.allTopics = res;
       }, (err) => {
         this.hasError = true;
         this.isLoading = false;
