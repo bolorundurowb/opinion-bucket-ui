@@ -1,5 +1,30 @@
 <div class="container">
+  <div style="margin-bottom: 30px;">
+    <sui-select
+      class="floating labeled icon button"
+      icon="filter"
+      [options]="categories"
+      labelField="title"
+      valueField="_id"
+      [isSearchable]="false"
+      placeholder="Select Filter"
+      #filterSelect
+      (selectedOptionChange)="filterChanged($event)">
+
+      <div class="header">
+        <i class="tags icon"></i>
+        Filter by Category
+      </div>
+
+      <sui-select-option
+        *ngFor="let category of filterSelect.filteredOptions"
+        [value]="category">
+      </sui-select-option>
+    </sui-select>
+  </div>
+
   <div class="ui icon red message" *ngIf="hasError">
+    <i class="remove icon"></i>
     <div class="content">
       <div class="header">
         Sorry an error occurred.
@@ -18,22 +43,46 @@
     </div>
   </div>
 
-  <div class="ui divided items">
-    <div class="item" *ngFor="let topic of topics">
-      <div class="content">
-        <a class="header">{{topic.title}}</a>
-        <div class="meta">
-          <span class="cinema">{{topic.date | date: 'medium'}}</span>
-        </div>
-        <div class="description">
-          <p>{{topic.content | slice:0:600}} ...</p>
-        </div>
-        <div class="extra">
-          <div class="ui label" *ngFor="let category of topic.categories">
-            <i class="tag icon"></i>
-            {{category}}
+  <div *ngIf="!isLoading && topicsToDisplay.length !== 0">
+    <div class="ui divided items">
+      <div class="item" *ngFor="let topic of topicsToDisplay">
+        <div class="content">
+          <a class="header">{{topic.title}}</a>
+          <div class="meta">
+            <span class="cinema">{{topic.date | date: 'medium'}}</span>
+          </div>
+          <div class="description">
+            <p>{{topic.content | slice:0:600}} ...</p>
+          </div>
+          <div class="extra">
+            <div class="ui label" *ngFor="let category of topic.categories">
+              <i class="tag icon"></i>
+              {{category.title}}
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div>
+      <sui-pagination
+        [collectionSize]="numOfTopics"
+        [pageSize]="pageSize"
+        [maxSize]="maxSize"
+        [hasEllipses]="true"
+        (pageChange)="selectedPage($event)">
+      </sui-pagination>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && topicsToDisplay.length === 0">
+    <div class="ui teal icon message">
+      <i class="ellipsis horizontal icon"></i>
+      <div class="content">
+        <div class="header">
+          Eeerrrrm, this is awkward
+        </div>
+        <p>We are as surprised as you are. please give us some time to populate this place with topics</p>
       </div>
     </div>
   </div>
