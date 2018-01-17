@@ -39,12 +39,13 @@
     </div>
   </div>
 
-  <div class="text-center">
-    <sui-pagination [collectionSize]="numOfTopics"
-                    [pageSize]="pageSize"
-                    [maxSize]="maxSize"
-                    [hasEllipses]="true"
-                    (pageChange)="selectedPage($event)">
+  <div>
+    <sui-pagination
+      [collectionSize]="numOfTopics"
+      [pageSize]="pageSize"
+      [maxSize]="maxSize"
+      [hasEllipses]="true"
+      (pageChange)="selectedPage($event)">
     </sui-pagination>
   </div>
   </div>
