@@ -136,4 +136,9 @@ export class NavbarComponent implements OnInit {
     // clear saved user data
     this.auth.clearData();
   }
+
+  openSidebar(): void {
+    this.$('.ui.sidebar')
+      .sidebar('toggle');
+  }
 }

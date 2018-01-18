@@ -39,10 +39,22 @@
 
     <!--Auth buttons for unsigned in users-->
     <div class="auth" *ngIf="!isLoggedIn">
+      <a class="sidebar-trigger" (click)="openSidebar()">
+        <i class="sidebar teal large icon"></i>
+      </a>
       <button class="btn-register" (click)="openRegisterModal()">Register</button>
       <button class="btn-login" (click)="openLoginModal()">Login</button>
     </div>
   </div>
+</div>
+
+<div class="ui sidebar right vertical menu">
+  <a class="item">
+    Login
+  </a>
+  <a class="item">
+    Sign Up
+  </a>
 </div>
 
 <!--Login Modal-->
