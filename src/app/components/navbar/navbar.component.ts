@@ -141,4 +141,9 @@ export class NavbarComponent implements OnInit {
     this.$('.ui.sidebar')
       .sidebar('toggle');
   }
+
+  dismissSidebar(): void {
+    this.$('.ui.sidebar')
+      .sidebar('toggle');
+  }
 }

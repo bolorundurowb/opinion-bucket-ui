@@ -49,10 +49,10 @@
 </div>
 
 <div class="ui sidebar right vertical menu">
-  <a class="item">
+  <a class="item" (click)="dismissSidebar(); openLoginModal();">
     Login
   </a>
-  <a class="item">
+  <a class="item" (click)="dismissSidebar(); openRegisterModal();">
     Sign Up
   </a>
 </div>
