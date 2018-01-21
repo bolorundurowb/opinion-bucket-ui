@@ -16,6 +16,10 @@ const appRoutes: Routes = [
   {
     path: '',
     component: TopicListComponent
+  },
+  {
+    path: 'topics/:id',
+    component: TopicDetailsComponent
   }
 ];
 
