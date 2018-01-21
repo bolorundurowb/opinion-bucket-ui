@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container">
+  <div class="ui icon message" *ngIf="isLoading">
+    <i class="notched circle loading icon"></i>
+    <div class="content">
+      <div class="header">
+        Just one second
+      </div>
+      <p>We're fetching the topic details for you.</p>
+    </div>
+  </div>
 
-</body>
-</html>
+  <div class="ui icon red message" *ngIf="hasError">
+    <i class="remove icon"></i>
+    <div class="content">
+      <div class="header">
+        Uh oh.
+      </div>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+</div>
