@@ -47,7 +47,7 @@
     <div class="ui divided items">
       <div class="item" *ngFor="let topic of topicsToDisplay">
         <div class="content">
-          <a class="header">{{topic.title}}</a>
+          <a class="header" (click)="goToDetails(topic._id)">{{topic.title}}</a>
           <div class="meta">
             <span class="cinema">{{topic.date | date: 'medium'}}</span>
           </div>

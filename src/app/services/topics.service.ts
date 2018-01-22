@@ -14,4 +14,8 @@ export class TopicsService {
   getByCategories(catId: string): Observable<Array<any>> {
     return this.http.get(`${environment.apiUrl}topics?category=${catId}`);
   }
+
+  getById(id: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}topics/${id}`);
+  }
 }
