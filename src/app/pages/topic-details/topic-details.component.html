@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="ui icon message" *ngIf="isLoading">
+    <i class="notched circle loading icon"></i>
+    <div class="content">
+      <div class="header">
+        Just one second
+      </div>
+      <p>We're fetching the topic details for you.</p>
+    </div>
+  </div>
+
+  <div class="ui icon red message" *ngIf="hasError">
+    <i class="remove icon"></i>
+    <div class="content">
+      <div class="header">
+        Uh oh.
+      </div>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && topic">
+    <div class="ui divided items">
+      <div class="item">
+        <div class="content">
+          <a class="header">{{topic.title}}</a>
+          <div class="meta">
+            <span class="cinema">{{topic.date | date: 'medium'}}</span>
+          </div>
+          <div class="description">
+            <p>{{topic.content}}</p>
+          </div>
+          <div class="extra">
+            <div class="ui label" *ngFor="let category of topic.categories">
+              <i class="tag icon"></i>
+              {{category.title}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -10,11 +10,16 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {TopicListComponent} from './pages/topic-list/topic-list.component';
 import {RouterModule, Routes} from '@angular/router';
+import {TopicDetailsComponent} from './pages/topic-details/topic-details.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: TopicListComponent
+  },
+  {
+    path: 'topics/:id',
+    component: TopicDetailsComponent
   }
 ];
 
@@ -22,7 +27,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    TopicListComponent
+    TopicListComponent,
+    TopicDetailsComponent
   ],
   imports: [
     BrowserModule,

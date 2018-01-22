@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 declare var jQuery: any;
 
@@ -12,8 +13,12 @@ declare var jQuery: any;
 
 export class NavbarComponent implements OnInit {
   $: any;
+
+  // data fields
   user = { username: '', password: '' };
   newUser = { username: '', password: '', email: '', passwordAgain: '' };
+
+  // vars to control views
   isLoggedIn: boolean;
   isLoading: boolean;
   hasError: boolean;
@@ -24,7 +29,9 @@ export class NavbarComponent implements OnInit {
   displayName: string;
 
   constructor(
-    private auth: AuthService) {
+    private auth: AuthService,
+    private router: Router
+  ) {
     this.$ = jQuery;
   }
 
@@ -145,5 +152,9 @@ export class NavbarComponent implements OnInit {
   dismissSidebar(): void {
     this.$('.ui.sidebar')
       .sidebar('toggle');
+  }
+
+  goHome(): void {
+    this.router.navigate(['']);
   }
 }
