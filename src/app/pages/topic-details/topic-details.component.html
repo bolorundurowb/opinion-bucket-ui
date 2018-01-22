@@ -18,4 +18,25 @@
       <p>{{ errorMessage }}</p>
     </div>
   </div>
+
+  <div *ngIf="!isLoading && topic">
+    <div class="ui divided items">
+      <div class="item">
+        <div class="content">
+          <a class="header">{{topic.title}}</a>
+          <div class="meta">
+            <span class="cinema">{{topic.date | date: 'medium'}}</span>
+          </div>
+          <div class="description">
+            <p>{{topic.content}}</p>
+          </div>
+          <div class="extra">
+            <div class="ui label" *ngFor="let category of topic.categories">
+              <i class="tag icon"></i>
+              {{category.title}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

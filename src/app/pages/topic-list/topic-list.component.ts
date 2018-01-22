@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TopicsService} from '../../services/topics.service';
 import {CategoriesService} from '../../services/categories.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-topic-list',
@@ -26,7 +27,10 @@ export class TopicListComponent implements OnInit {
   // category data
   categories: Array<any> = [];
 
-  constructor(private topicService: TopicsService, private categoriesService: CategoriesService) {}
+  constructor(
+    private topicService: TopicsService,
+    private categoriesService: CategoriesService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.hasError = false;
@@ -82,5 +86,9 @@ export class TopicListComponent implements OnInit {
 
     // set the new data to be displayed
     this.topicsToDisplay = this.allTopics.slice(index, index + this.pageSize);
+  }
+
+  goToDetails(id: string) {
+    this.router.navigate(['topics', id]);
   }
 }
