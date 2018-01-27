@@ -50,7 +50,7 @@ export class LikeComponent implements OnInit {
   }
 
   like(): void {
-
+    //
   }
 
   unlike(): void {
