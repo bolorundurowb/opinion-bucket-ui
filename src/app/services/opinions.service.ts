@@ -16,4 +16,12 @@ export class OpinionsService {
   getAllOpinions(topicId: string): Observable<Array<any>> {
     return this.http.get(`${environment.apiUrl}topics/${topicId}/opinions`);
   }
+
+  likeOpinion(topicId: string, opinionId: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}topics/${topicId}/opinions/${opinionId}/like`, {});
+  }
+
+  unlikeOpinion(topicId: string, opinionId: string): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}topics/${topicId}/opinions/${opinionId}/like`);
+  }
 }

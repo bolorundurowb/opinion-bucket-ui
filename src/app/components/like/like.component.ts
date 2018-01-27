@@ -15,6 +15,7 @@ export class LikeComponent implements OnInit {
 
   // variables
   userId: string;
+  isLoading: boolean;
 
   // data models
   numOfLikes: number;
@@ -50,10 +51,34 @@ export class LikeComponent implements OnInit {
   }
 
   like(): void {
-    //
+    this.isLoading = true;
+
+    this.opinionsService.likeOpinion(this.topicId, this.opinionId)
+      .subscribe((res) => {
+        // update the number of likes
+        this.numOfLikes = res.likes.number;
+
+        // tell the control that the opinion has been liked
+        this.hasLiked = true;
+
+        // stop loading
+        this.isLoading = false;
+      });
   }
 
   unlike(): void {
+    this.isLoading = true;
 
+    this.opinionsService.unlikeOpinion(this.topicId, this.opinionId)
+      .subscribe((res) => {
+        // update the number of likes
+        this.numOfLikes = res.likes.number;
+
+        // tell the control that the opinion has been unliked
+        this.hasLiked = false;
+
+        // stop loading
+        this.isLoading = false;
+      });
   }
 }

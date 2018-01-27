@@ -1,5 +1,5 @@
 <div [disabled]="!isEnabled">
-  <div class="ui labeled button" tabindex="0" *ngIf="!hasLiked" (click)="like()">
+  <div class="ui labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="!hasLiked" (click)="like()">
     <div class="ui red button">
       <i class="heart icon"></i> Like
     </div>
@@ -8,7 +8,7 @@
     </a>
   </div>
 
-  <div class="ui labeled button" tabindex="0" *ngIf="hasLiked" (click)="unlike()">
+  <div class="ui labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="hasLiked" (click)="unlike()">
     <div class="ui red button">
       <i class="heart icon"></i> Unlike
     </div>
@@ -16,5 +16,4 @@
       {{numOfLikes  | number: '.2'}}
     </a>
   </div>
-
 </div>
