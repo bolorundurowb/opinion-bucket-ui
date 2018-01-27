@@ -3,12 +3,12 @@ import {OpinionsService} from '../../services/opinions.service';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'app-like',
-  templateUrl: 'like.component.html',
+  selector: 'app-dislike',
+  templateUrl: 'dislike.component.html',
   styleUrls: [],
   providers: [OpinionsService, AuthService]
 })
-export class LikeComponent implements OnInit {
+export class DislikeComponent implements OnInit {
   // inputs
   @Input() topicId: string;
   @Input() opinionId: string;
@@ -21,14 +21,12 @@ export class LikeComponent implements OnInit {
   isLoading: boolean;
 
   // data models
-  numOfLikes: number;
-  hasLiked: boolean;
+  numOfDislikes: number;
+  hasDisliked: boolean;
   isEnabled: boolean;
 
-  constructor(
-    private opinionsService: OpinionsService,
-    private authService: AuthService
-  ) {
+  constructor(private opinionsService: OpinionsService,
+              private authService: AuthService) {
     this.isEnabled = true;
   }
 
@@ -39,16 +37,16 @@ export class LikeComponent implements OnInit {
     this.opinionsService.getOpinion(this.topicId, this.opinionId)
       .subscribe((res) => {
         // set number of likes
-        this.numOfLikes = res.likes.number;
+        this.numOfDislikes = res.dislikes.number;
 
-        // check if the user has disliked
-        if (res.dislikes.users.indexOf(this.userId) > -1) {
+        // check if the user has liked
+        if (res.likes.users.indexOf(this.userId) > -1) {
           this.isEnabled = false;
         }
 
         // check if user has liked already
-        if (res.likes.users.indexOf(this.userId) > -1) {
-          this.hasLiked = true;
+        if (res.dislikes.users.indexOf(this.userId) > -1) {
+          this.hasDisliked = true;
         }
       }, (err) => {
         // emit error
@@ -56,16 +54,16 @@ export class LikeComponent implements OnInit {
       });
   }
 
-  like(): void {
+  dislike(): void {
     this.isLoading = true;
 
-    this.opinionsService.likeOpinion(this.topicId, this.opinionId)
+    this.opinionsService.dislikeOpinion(this.topicId, this.opinionId)
       .subscribe((res) => {
         // update the number of likes
-        this.numOfLikes = res.likes.number;
+        this.numOfDislikes = res.dislikes.number;
 
-        // tell the control that the opinion has been liked
-        this.hasLiked = true;
+        // tell the control that the opinion has been disliked
+        this.hasDisliked = true;
 
         // stop loading
         this.isLoading = false;
@@ -78,16 +76,16 @@ export class LikeComponent implements OnInit {
       });
   }
 
-  unlike(): void {
+  unDislike(): void {
     this.isLoading = true;
 
     this.opinionsService.unlikeOpinion(this.topicId, this.opinionId)
       .subscribe((res) => {
-        // update the number of likes
-        this.numOfLikes = res.likes.number;
+        // update the number of dislikes
+        this.numOfDislikes = res.dislikes.number;
 
-        // tell the control that the opinion has been unliked
-        this.hasLiked = false;
+        // tell the control that the opinion has been undisliked
+        this.hasDisliked = false;
 
         // stop loading
         this.isLoading = false;

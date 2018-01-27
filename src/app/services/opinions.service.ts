@@ -24,4 +24,12 @@ export class OpinionsService {
   unlikeOpinion(topicId: string, opinionId: string): Observable<any> {
     return this.http.delete(`${environment.apiUrl}topics/${topicId}/opinions/${opinionId}/like`);
   }
+
+  dislikeOpinion(topicId: string, opinionId: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}topics/${topicId}/opinions/${opinionId}/dislike`, {});
+  }
+
+  unDislikeOpinion(topicId: string, opinionId: string): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}topics/${topicId}/opinions/${opinionId}/dislike`);
+  }
 }
