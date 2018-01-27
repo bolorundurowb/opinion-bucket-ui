@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
 import {AuthService} from '../../services/auth.service';
 
@@ -12,6 +12,9 @@ export class LikeComponent implements OnInit {
   // inputs
   @Input() topicId: string;
   @Input() opinionId: string;
+
+  // outputs
+  @Output() errors = new EventEmitter<any>();
 
   // variables
   userId: string;
@@ -47,6 +50,9 @@ export class LikeComponent implements OnInit {
         if (res.likes.users.indexOf(this.userId) > -1) {
           this.hasLiked = true;
         }
+      }, (err) => {
+        // emit error
+        this.errors.emit(err);
       });
   }
 
@@ -63,6 +69,12 @@ export class LikeComponent implements OnInit {
 
         // stop loading
         this.isLoading = false;
+      }, (err) => {
+        // stop loading
+        this.isLoading = false;
+
+        // emit error
+        this.errors.emit(err);
       });
   }
 
@@ -79,6 +91,12 @@ export class LikeComponent implements OnInit {
 
         // stop loading
         this.isLoading = false;
+      }, (err) => {
+        // stop loading
+        this.isLoading = false;
+
+        // emit error
+        this.errors.emit(err);
       });
   }
 }
