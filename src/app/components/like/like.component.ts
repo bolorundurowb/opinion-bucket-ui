@@ -5,7 +5,7 @@ import {AuthService} from '../../services/auth.service';
 @Component({
   selector: 'app-like',
   templateUrl: 'like.component.html',
-  styleUrls: ['like.component.scss'],
+  styleUrls: [],
   providers: [OpinionsService, AuthService]
 })
 export class LikeComponent implements OnInit {
