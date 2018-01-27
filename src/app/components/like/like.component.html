@@ -1,0 +1,19 @@
+<div [disabled]="!isEnabled">
+  <div class="ui labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="!hasLiked" (click)="like()">
+    <div class="ui red button">
+      <i class="heart icon"></i> Like
+    </div>
+    <a class="ui basic red left pointing label">
+      {{numOfLikes | number: '.2'}}
+    </a>
+  </div>
+
+  <div class="ui labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="hasLiked" (click)="unlike()">
+    <div class="ui red button">
+      <i class="empty heart icon"></i> Unlike
+    </div>
+    <a class="ui basic red left pointing label">
+      {{numOfLikes  | number: '.2'}}
+    </a>
+  </div>
+</div>
