@@ -7,10 +7,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class OpinionComponent {
   // inputs
-  @Input opinion: any;
+  @Input() opinion: any;
 
   // outputs
-  @Output error = new EventEmitter<any>();
+  @Output() error = new EventEmitter<any>();
 
   constructor() {
   }
