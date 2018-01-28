@@ -79,7 +79,7 @@ export class DislikeComponent implements OnInit {
   unDislike(): void {
     this.isLoading = true;
 
-    this.opinionsService.unlikeOpinion(this.topicId, this.opinionId)
+    this.opinionsService.unDislikeOpinion(this.topicId, this.opinionId)
       .subscribe((res) => {
         // update the number of dislikes
         this.numOfDislikes = res.dislikes.number;
