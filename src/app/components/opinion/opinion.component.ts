@@ -1,10 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
+import {UsersService} from '../../services/users.service';
 
 @Component({
   selector: 'app-opinion',
   templateUrl: './opinion.component.html',
-  styleUrls: []
+  styleUrls: [],
+  providers: [UsersService]
 })
 export class OpinionComponent implements OnInit {
   // inputs
@@ -19,7 +21,7 @@ export class OpinionComponent implements OnInit {
   displayName: string;
   displayPhoto: string;
 
-  constructor() {
+  constructor(private usersService: UsersService) {
     // set the opinion creation date as relative time
     if (this.opinion.date) {
       this.creationTime = moment(this.opinion.date, 'YYYY-MM-DDTHH:mm:ss.sssZ').fromNow();
@@ -37,7 +39,21 @@ export class OpinionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usersService.retrieveUserById(this.opinion.author)
+      .subscribe((res) => {
+        this.author = res;
 
+        // set the new profile photo
+        if (res.profilePhoto) {
+          this.displayPhoto = res.profilePhoto;
+        } else if (res.gender === 'Female') {
+          this.displayPhoto = './../../../assets/avatars/female.jpg';
+        } else if (res.gender === 'Male') {
+          this.displayPhoto = './../../../assets/avatars/male.jpg'
+        }
+      }, (err) => {
+        this.propagateError(err);
+      });
   }
 
   propagateError(err: any): void {
