@@ -12,7 +12,7 @@ export class OpinionsComponent implements OnInit {
   @Input() topicId: string;
 
   // outputs
-  @Output() errors = EventEmitter<any>();
+  @Output() errors = new EventEmitter<any>();
 
   // data models
   opinions: Array<any>;
