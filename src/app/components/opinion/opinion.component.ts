@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {UsersService} from '../../services/users.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-opinion',
@@ -21,7 +22,8 @@ export class OpinionComponent implements OnInit {
   displayName: string;
   displayPhoto: string;
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService,
+              private router: Router) {
     // set the opinion creation date as relative time
     if (this.opinion.date) {
       this.creationTime = moment(this.opinion.date, 'YYYY-MM-DDTHH:mm:ss.sssZ').fromNow();
@@ -58,5 +60,9 @@ export class OpinionComponent implements OnInit {
 
   propagateError(err: any): void {
     this.errors.emit(err);
+  }
+
+  goToProfile(): void {
+    this.router.navigate(['users', this.opinion.author]);
   }
 }
