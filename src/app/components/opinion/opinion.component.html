@@ -2,13 +2,13 @@
   <div class="ui feed">
     <div class="event">
       <div class="label">
-        <img [src]="author.profilePhoto">
+        <img [src]="displayPhoto">
       </div>
       <div class="content">
         <div class="summary">
-          <a>{{author.username}}</a> added an opinion
+          <a>{{displayName}}</a> added an opinion
           <div class="date">
-            3 days ago
+            {{creationTime}}
           </div>
         </div>
         <div class="ui medium header">{{opinion.title}}</div>
