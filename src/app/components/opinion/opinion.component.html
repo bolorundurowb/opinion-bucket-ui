@@ -1,0 +1,36 @@
+<div>
+  <div class="ui feed">
+    <div class="event">
+      <div class="label">
+        <img [src]="displayPhoto">
+      </div>
+      <div class="content">
+        <div class="summary">
+          <a (click)="goToProfile()">{{displayName}}</a> added an opinion
+          <div class="date">
+            {{creationTime}}
+          </div>
+        </div>
+        <div class="ui medium header">{{opinion.title}}</div>
+        <div class="extra text">
+          {{opinion.content}}
+        </div>
+        <div class="meta">
+          <div class="ui right">
+            <app-like
+              [topicId]="opinion.topicId"
+              [opinionId]="opinion._id"
+              (errors)="propagateError($event)"
+            ></app-like>
+
+            <app-dislike
+              [topicId]="opinion.topicId"
+              [opinionId]="opinion._id"
+              (errors)="propagateError($event)"
+            ></app-dislike>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
