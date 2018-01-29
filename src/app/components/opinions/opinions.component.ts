@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
 
 @Component({
@@ -8,6 +8,13 @@ import {OpinionsService} from '../../services/opinions.service';
   providers: [OpinionsService]
 })
 export class OpinionsComponent {
+  // inputs
+  @Input() topicId: string;
+
+  // data models
+  opinions: Array<any>;
+
   constructor(private opinionsService: OpinionsService) {
   }
+
 }
