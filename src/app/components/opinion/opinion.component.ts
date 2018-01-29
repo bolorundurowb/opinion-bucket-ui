@@ -10,8 +10,15 @@ export class OpinionComponent {
   @Input() opinion: any;
 
   // outputs
-  @Output() error = new EventEmitter<any>();
+  @Output() errors = new EventEmitter<any>();
+
+  // data models
+  author: any;
 
   constructor() {
+  }
+
+  propagateError(err: any): void {
+    this.errors.emit(err);
   }
 }
