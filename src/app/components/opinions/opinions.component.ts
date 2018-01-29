@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
 
 @Component({
@@ -7,9 +7,12 @@ import {OpinionsService} from '../../services/opinions.service';
   styleUrls: [],
   providers: [OpinionsService]
 })
-export class OpinionsComponent {
+export class OpinionsComponent implements OnInit {
   // inputs
   @Input() topicId: string;
+
+  // outputs
+  @Output() errors = EventEmitter<any>();
 
   // data models
   opinions: Array<any>;
@@ -17,4 +20,12 @@ export class OpinionsComponent {
   constructor(private opinionsService: OpinionsService) {
   }
 
+  ngOnInit(): void {
+    this.opinionsService.getAllOpinions(this.topicId)
+      .subscribe((res) => {
+        this.opinions = res;
+      }, (err) => {
+        this.errors.emit(err);
+      });
+  }
 }
