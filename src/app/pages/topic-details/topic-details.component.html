@@ -39,4 +39,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="!isLoading && topic">
+    <app-opinions
+      [topicId]="topic._id"
+    ></app-opinions>
+  </div>
 </div>
