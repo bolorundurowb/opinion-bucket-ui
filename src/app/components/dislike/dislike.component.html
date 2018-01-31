@@ -1,4 +1,4 @@
-<div [disabled]="!isEnabled">
+<div [class.disabled]="!isEnabled">
   <div class="ui labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="!hasDisliked" (click)="dislike()">
     <div class="ui red button">
       <i class="heart icon"></i> Like

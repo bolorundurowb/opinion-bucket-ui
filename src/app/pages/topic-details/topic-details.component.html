@@ -41,6 +41,16 @@
     </div>
   </div>
 
+  <div style="margin-top: 30px; display: inline-block">
+    <div>
+      <h4 class="ui teal header">Opinions</h4>
+    </div>
+
+    <div>
+      <p>Add Opinions</p>
+    </div>
+  </div>
+
   <div *ngIf="!isLoading && topic">
     <app-opinions
       [topicId]="topic._id"
