@@ -1,7 +1,7 @@
 <a class="like" style="margin-left: 10px;" tabindex="0" *ngIf="!hasDisliked" (click)="dislike()">
-  <i class="like icon"></i> {{numOfDislikes | number: '.2'}} Dislikes
+  <i class="thumbs down icon"></i> {{numOfDislikes | number: '.2'}} Dislikes
 </a>
 
 <a class="like" style="margin-left: 10px;" tabindex="0" *ngIf="hasDisliked" (click)="unDislike()">
-  <i class="empty heart icon"></i> {{numOfDislikes | number: '.2'}} Dislikes
+  <i class="thumbs outline down icon"></i> {{numOfDislikes | number: '.2'}} Dislikes
 </a>
