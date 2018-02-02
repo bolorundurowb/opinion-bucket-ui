@@ -57,9 +57,9 @@ export class OpinionsComponent implements OnInit {
   getDisplayName(opinion: any): string {
     // show the username or full name as determined
     if (opinion.showName) {
-      return `$opinion.firstName} ${opinion.lastName}`;
+      return `${opinion.author.firstName} ${opinion.author.lastName}`;
     } else {
-      return opinion.username;
+      return opinion.author.username;
     }
   }
 
