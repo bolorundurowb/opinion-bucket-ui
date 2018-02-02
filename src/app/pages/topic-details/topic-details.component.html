@@ -39,4 +39,17 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="opinions-header" *ngIf="!isLoading && topic">
+    <div>
+      <h3 class="ui teal header">Opinions</h3>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && topic" class="opinions">
+    <app-opinions
+      [topicId]="topic._id"
+    ></app-opinions>
+  </div>
 </div>

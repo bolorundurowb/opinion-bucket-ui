@@ -1,8 +1,58 @@
 <div>
-  <div class="ui feed">
-    <app-opinion
-      *ngFor="let opinion of opinions"
-      [opinion]="opinion"
-    ></app-opinion>
+  <div class="ui icon message" *ngIf="isLoading">
+    <i class="notched circle loading icon"></i>
+    <div class="content">
+      <div class="header">
+        Just one second
+      </div>
+      <p>We're fetching the topic opinions for you.</p>
+    </div>
+  </div>
+
+
+  <div class="ui red compact message" *ngIf="hasError">
+      <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!isLoading && opinions.length === 0">
+    <div class="ui teal compact message">
+        <p>There are currently no opinions on this topic. We are sure you have one, add it. </p>
+    </div>
+  </div>
+
+  <div class="ui feed" *ngIf="!isLoading && opinions.length > 0">
+    <div class="event" *ngFor="let opinion of opinions">
+      <div class="label">
+        <img [src]="getProfilePhoto(opinion)">
+      </div>
+      <div class="content">
+        <div class="summary">
+          <a (click)="goToProfile(opinion.author._id)">{{getDisplayName(opinion)}}</a> added an opinion
+          <div class="date">
+            {{getDisplayTime(opinion)}}
+          </div>
+        </div>
+        <div class="opinion-title">{{opinion.title}}</div>
+        <div class="extra text">
+          {{opinion.content}}
+        </div>
+        <div class="meta">
+          <div class="ui right">
+            <app-like
+              [topicId]="opinion.topicId"
+              [opinionId]="opinion._id"
+              (errors)="displayError($event)"
+            ></app-like>
+
+            <app-dislike
+              [topicId]="opinion.topicId"
+              [opinionId]="opinion._id"
+              (errors)="displayError($event)"
+            ></app-dislike>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
