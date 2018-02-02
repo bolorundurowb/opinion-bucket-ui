@@ -11,7 +11,6 @@ import {TopicListComponent} from './pages/topic-list/topic-list.component';
 import {RouterModule, Routes} from '@angular/router';
 import {TopicDetailsComponent} from './pages/topic-details/topic-details.component';
 import {OpinionsComponent} from './components/opinions/opinions.component';
-import {OpinionComponent} from './components/opinion/opinion.component';
 import {LikeComponent} from './components/like/like.component';
 import {DislikeComponent} from './components/dislike/dislike.component';
 
@@ -33,7 +32,6 @@ const appRoutes: Routes = [
     TopicListComponent,
     TopicDetailsComponent,
     OpinionsComponent,
-    OpinionComponent,
     LikeComponent,
     DislikeComponent
   ],

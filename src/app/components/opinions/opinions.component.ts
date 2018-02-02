@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
+import {Router} from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-opinions',
@@ -17,7 +19,8 @@ export class OpinionsComponent implements OnInit {
   hasError: boolean;
   errorMessage: string;
 
-  constructor(private opinionsService: OpinionsService) {
+  constructor(private opinionsService: OpinionsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,5 +44,46 @@ export class OpinionsComponent implements OnInit {
         // display the error
         this.errorMessage = err.error.message || err.message;
       });
+  }
+
+  getDisplayTime(opinion: any): string {
+    // set the opinion creation date as relative time
+    if (opinion.date) {
+      return moment(opinion.date, 'YYYY-MM-DDTHH:mm:ss.sssZ').fromNow();
+    }
+  }
+
+  getDisplayName(opinion: any): string {
+    // show the username or full name as determined
+    if (opinion.showName) {
+      return `$opinion.firstName} ${opinion.lastName}`;
+    } else {
+      return opinion.username;
+    }
+  }
+
+  getProfilePhoto(opinion: any): string {
+    // set the new profile photo
+    if (opinion.author.profilePhoto) {
+      return opinion.auth.profilePhoto
+    } else if (opinion.author.gender === 'Female') {
+      return './../../../assets/avatars/female.jpg';
+    } else if (opinion.author.gender === 'Male') {
+      return './../../../assets/avatars/male.jpg'
+    } else {
+      return './../../../assets/avatars/decline.jpg';
+    }
+  }
+
+  goToProfile(authorId: string): void {
+    this.router.navigate(['users', authorId]);
+  }
+
+  propagateError(err: any): void {
+    // show error pane
+    this.hasError = true;
+
+    // display the error
+    this.errorMessage = err.error.message || err.message;
   }
 }
