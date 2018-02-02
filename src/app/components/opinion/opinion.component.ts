@@ -24,6 +24,11 @@ export class OpinionComponent implements OnInit {
 
   constructor(private usersService: UsersService,
               private router: Router) {
+    // set a neutral profile photo until one is loaded
+    this.displayPhoto = './../../../assets/avatars/decline.jpg';
+  }
+
+  ngOnInit(): void {
     // set the opinion creation date as relative time
     if (this.opinion.date) {
       this.creationTime = moment(this.opinion.date, 'YYYY-MM-DDTHH:mm:ss.sssZ').fromNow();
@@ -36,11 +41,6 @@ export class OpinionComponent implements OnInit {
       this.displayName = this.opinion.username;
     }
 
-    // set a neutral profile photo until one is loaded
-    this.displayPhoto = './../../../assets/avatars/decline.jpg';
-  }
-
-  ngOnInit(): void {
     this.usersService.retrieveUserById(this.opinion.author)
       .subscribe((res) => {
         this.author = res;

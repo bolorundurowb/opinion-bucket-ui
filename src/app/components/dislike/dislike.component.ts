@@ -31,27 +31,31 @@ export class DislikeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId = this.authService.retrieveUser()._id;
+    const user = this.authService.retrieveUser();
 
-    // retrieve the opinion
-    this.opinionsService.getOpinion(this.topicId, this.opinionId)
-      .subscribe((res) => {
-        // set number of likes
-        this.numOfDislikes = res.dislikes.number;
+    if (user) {
+      this.userId = user._id;
 
-        // check if the user has liked
-        if (res.likes.users.indexOf(this.userId) > -1) {
-          this.isEnabled = false;
-        }
+      // retrieve the opinion
+      this.opinionsService.getOpinion(this.topicId, this.opinionId)
+        .subscribe((res) => {
+          // set number of likes
+          this.numOfDislikes = res.dislikes.number;
 
-        // check if user has liked already
-        if (res.dislikes.users.indexOf(this.userId) > -1) {
-          this.hasDisliked = true;
-        }
-      }, (err) => {
-        // emit error
-        this.errors.emit(err);
-      });
+          // check if the user has liked
+          if (res.likes.users.indexOf(this.userId) > -1) {
+            this.isEnabled = false;
+          }
+
+          // check if user has liked already
+          if (res.dislikes.users.indexOf(this.userId) > -1) {
+            this.hasDisliked = true;
+          }
+        }, (err) => {
+          // emit error
+          this.errors.emit(err);
+        });
+    }
   }
 
   dislike(): void {
