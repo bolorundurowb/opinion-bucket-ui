@@ -34,6 +34,7 @@ export class OpinionsComponent implements OnInit {
 
         // bind the retrieved data
         this.opinions = res;
+        console.log(res);
       }, (err) => {
         // stop the loading ui
         this.isLoading = false;

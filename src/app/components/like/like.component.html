@@ -1,7 +1,7 @@
 <a class="like" tabindex="0" *ngIf="!hasLiked" (click)="like()">
-  <i class="thumbs up icon"></i> {{numOfLikes | number: '.2'}} Likes
+  <i class="thumbs up icon"></i> {{numOfLikes}} Likes
 </a>
 
 <a class="like" tabindex="0" *ngIf="hasLiked" (click)="unlike()">
-  <i class="thumbs outline up icon"></i> {{numOfLikes | number: '.2'}} Likes
+  <i class="thumbs outline up icon"></i> {{numOfLikes}} Likes
 </a>
