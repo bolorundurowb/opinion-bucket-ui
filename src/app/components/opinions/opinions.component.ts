@@ -6,7 +6,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-opinions',
   templateUrl: './opinions.component.html',
-  styleUrls: [],
+  styleUrls: ['./opinions.component.scss'],
   providers: [OpinionsService]
 })
 export class OpinionsComponent implements OnInit {
@@ -34,7 +34,6 @@ export class OpinionsComponent implements OnInit {
 
         // bind the retrieved data
         this.opinions = res;
-        console.log(res);
       }, (err) => {
         // stop the loading ui
         this.isLoading = false;
@@ -80,7 +79,7 @@ export class OpinionsComponent implements OnInit {
     this.router.navigate(['users', authorId]);
   }
 
-  propagateError(err: any): void {
+  displayError(err: any): void {
     // show error pane
     this.hasError = true;
 
