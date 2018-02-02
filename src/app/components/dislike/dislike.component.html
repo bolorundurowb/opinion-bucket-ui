@@ -1,20 +1,7 @@
-<div [class.disabled]="!isEnabled">
-  <div class="ui left labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="!hasDisliked" (click)="dislike()">
-    <a class="ui basic right pointing label">
-      {{numOfDislikes | number: '.2'}}
-    </a>
-    <div class="ui button">
-      <i class="heart icon"></i> Dislike
-    </div>
-  </div>
+<a class="like" style="margin-left: 10px;" tabindex="0" *ngIf="!hasDisliked" (click)="dislike()">
+  <i class="like icon"></i> {{numOfDislikes | number: '.2'}} Dislikes
+</a>
 
-  <div class="ui left labeled button" [class.loading]="isLoading" tabindex="0" *ngIf="hasDisliked"
-       (click)="unDislike()">
-    <a class="ui basic right pointing label">
-      {{numOfDislikes | number: '.2'}}
-    </a>
-    <div class="ui button">
-      <i class="empty heart icon"></i> Undislike
-    </div>
-  </div>
-</div>
+<a class="like" style="margin-left: 10px;" tabindex="0" *ngIf="hasDisliked" (click)="unDislike()">
+  <i class="empty heart icon"></i> {{numOfDislikes | number: '.2'}} Dislikes
+</a>
