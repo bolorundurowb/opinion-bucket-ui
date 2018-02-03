@@ -15,6 +15,8 @@ import {LikeComponent} from './components/like/like.component';
 import {DislikeComponent} from './components/dislike/dislike.component';
 // interceptors
 import {JwtInterceptor} from './interceptors/JwtInterceptor';
+// services
+import {AuthService} from './services/auth.service';
 
 const appRoutes: Routes = [
   {
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
     SuiModule
   ],
   providers: [
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
