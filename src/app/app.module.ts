@@ -2,7 +2,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SuiModule} from 'ng2-semantic-ui';
 // components
 import {AppComponent} from './app.component';
@@ -13,6 +13,10 @@ import {TopicDetailsComponent} from './pages/topic-details/topic-details.compone
 import {OpinionsComponent} from './components/opinions/opinions.component';
 import {LikeComponent} from './components/like/like.component';
 import {DislikeComponent} from './components/dislike/dislike.component';
+// interceptors
+import {JwtInterceptor} from './interceptors/JwtInterceptor';
+// services
+import {AuthService} from './services/auth.service';
 
 const appRoutes: Routes = [
   {
@@ -45,7 +49,14 @@ const appRoutes: Routes = [
     ),
     SuiModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
