@@ -15,7 +15,6 @@ import {LikeComponent} from './components/like/like.component';
 import {DislikeComponent} from './components/dislike/dislike.component';
 // interceptors
 import {JwtInterceptor} from './interceptors/JwtInterceptor';
-import {ErrorInterceptor} from './interceptors/ErrorInterceptor';
 
 const appRoutes: Routes = [
   {
@@ -52,11 +51,6 @@ const appRoutes: Routes = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
       multi: true
     }
   ],

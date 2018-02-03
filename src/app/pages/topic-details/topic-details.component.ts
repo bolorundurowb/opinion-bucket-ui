@@ -33,6 +33,7 @@ export class TopicDetailsComponent implements OnInit {
 
     this.topicService.getById(this.topicId)
       .subscribe((res) => {
+        console.log(res);
         // remove the loader
         this.isLoading = false;
 
