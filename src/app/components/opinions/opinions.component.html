@@ -21,6 +21,26 @@
   </div>
 
   <div class="ui feed" *ngIf="!isLoading && opinions.length > 0">
+    <div class="event">
+      <div class="label">
+        <img src="">
+      </div>
+      <div class="content">
+        <form class="ui reply form">
+          <div class="fields">
+            <div class="nine wide field">
+              <textarea rows="2"></textarea>
+            </div>
+          </div>
+          <div class="tiny ui teal submit button">
+            Add
+          </div>
+          <div class="tiny ui button">
+            Close
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="event" *ngFor="let opinion of opinions">
       <div class="label">
         <img [src]="getProfilePhoto(opinion)">
