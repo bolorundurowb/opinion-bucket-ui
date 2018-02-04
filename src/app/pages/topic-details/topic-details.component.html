@@ -41,9 +41,16 @@
     </div>
   </div>
 
-  <div class="opinions-header" *ngIf="!isLoading && topic">
-    <div>
+  <div class="ui two column grid container" *ngIf="!isLoading && topic">
+    <div class="column">
       <h3 class="ui teal header">Opinions</h3>
+
+    </div>
+    <div class="column">
+      <button class="tiny ui labeled icon teal basic button add-opinion">
+        <i class="add icon"></i>
+        New Opinion
+      </button>
     </div>
   </div>
 
