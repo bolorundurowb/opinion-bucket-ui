@@ -35,15 +35,14 @@ export class LikeComponent implements OnInit {
   ngOnInit(): void {
     const user = this.authService.retrieveUser();
 
-    if (user) {
-      this.userId = user._id;
+    // retrieve the opinion
+    this.opinionsService.getOpinion(this.topicId, this.opinionId)
+      .subscribe((res) => {
+        // set number of likes
+        this.numOfLikes = res.likes.number;
 
-      // retrieve the opinion
-      this.opinionsService.getOpinion(this.topicId, this.opinionId)
-        .subscribe((res) => {
-          // set number of likes
-          this.numOfLikes = res.likes.number;
-
+        if (user) {
+          this.userId = user._id;
           // check if the user has disliked
           if (res.dislikes.users.indexOf(this.userId) > -1) {
             this.isEnabled = false;
@@ -53,11 +52,11 @@ export class LikeComponent implements OnInit {
           if (res.likes.users.indexOf(this.userId) > -1) {
             this.hasLiked = true;
           }
-        }, (err) => {
-          // emit error
-          this.errors.emit(err);
-        });
-    }
+        }
+      }, (err) => {
+        // emit error
+        this.errors.emit(err);
+      });
   }
 
   like(): void {
