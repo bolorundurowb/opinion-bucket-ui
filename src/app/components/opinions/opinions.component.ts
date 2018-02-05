@@ -112,6 +112,28 @@ export class OpinionsComponent implements OnInit {
     // show loading
     this.isAddingOpinion = true;
     this.showNewOpinionTitleError = false;
+    this.hasError = false;
+
+    if (!this.title) {
+      this.isAddingOpinion = false;
+      this.showNewOpinionTitleError = true;
+      return;
+    }
+
+    this.opinionsService.createOpinion(
+      this.topicId,
+      {
+        title: this.title,
+        content: this.content
+      }
+    )
+      .subscribe((res) => {
+        this.isAddingOpinion = false;
+        this.opinionEntryClosed.emit(true);
+      }, (err) => {
+        this.hasError = true;
+        this.errorMessage = err.error.message || err.message;
+      });
 
     // after all
     this.title = '';

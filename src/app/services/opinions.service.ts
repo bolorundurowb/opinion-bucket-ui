@@ -33,5 +33,7 @@ export class OpinionsService {
     return this.http.delete(`${environment.apiUrl}topics/${topicId}/opinions/${opinionId}/dislike`);
   }
 
-
+  createOpinion(topicId: string, payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}topics/${topicId}/opinions`, payload);
+  }
 }
