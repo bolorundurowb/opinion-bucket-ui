@@ -16,7 +16,7 @@ export class OpinionsComponent implements OnInit {
   @Input() showEntry: boolean;
 
   // outputs
-  @Output() opinionEntryClosed = new EventEmitter();
+  @Output() opinionEntryClosed = new EventEmitter<boolean>();
 
   // data models
   opinions: Array<any>;
@@ -28,6 +28,7 @@ export class OpinionsComponent implements OnInit {
   title: string;
   content: string;
   isAddingOpinion: boolean;
+  showNewOpinionTitleError: boolean;
 
   constructor(private opinionsService: OpinionsService,
               private router: Router,
@@ -104,16 +105,17 @@ export class OpinionsComponent implements OnInit {
   }
 
   closeNewOpinionEntry(): void {
-    this.opinionEntryClosed.emit();
+    this.opinionEntryClosed.emit(false);
   }
 
   addOpinion(): void {
     // show loading
     this.isAddingOpinion = true;
+    this.showNewOpinionTitleError = false;
 
     // after all
     this.title = '';
     this.content = '';
-    // this.opinionEntryClosed.emit();
+    this.opinionEntryClosed.emit(true);
   }
 }

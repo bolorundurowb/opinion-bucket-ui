@@ -30,6 +30,9 @@
             <div class="nine wide field">
               <label>Title</label>
               <input type="text" placeholder="title" name="title" [(ngModel)]="title">
+              <div class="ui left red pointing label" *ngIf="showNewOpinionTitleError">
+                A title is required
+              </div>
             </div>
           </div>
           <div class="fields">
