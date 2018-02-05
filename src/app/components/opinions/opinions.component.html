@@ -9,7 +9,6 @@
     </div>
   </div>
 
-
   <div class="ui red compact message" *ngIf="hasError">
       <p>{{ errorMessage }}</p>
   </div>
@@ -21,7 +20,7 @@
   </div>
 
   <div class="ui feed" *ngIf="!isLoading && opinions.length > 0">
-    <div class="event" *ngIf="showEntry || temp">
+    <div class="event" *ngIf="showEntry">
       <div class="label">
         <img [src]="getCurrentUserPhoto()">
       </div>
@@ -29,15 +28,22 @@
         <form class="ui reply form">
           <div class="fields">
             <div class="nine wide field">
-              <textarea rows="2"></textarea>
+              <label>Title</label>
+              <input type="text" placeholder="title" name="title" [(ngModel)]="title">
             </div>
           </div>
-          <div class="tiny ui teal submit button">
+          <div class="fields">
+            <div class="nine wide field">
+              <label>Content</label>
+              <textarea rows="2" placeholder="content" name="content" [(ngModel)]="content"></textarea>
+            </div>
+          </div>
+          <div class="tiny ui teal submit button" [class.loading]="isAddingOpinion" (click)="addOpinion()">
             Add
           </div>
-          <div class="tiny ui button" (click)="closeNewOpinionEntry()">
+          <button class="tiny ui button" (click)="closeNewOpinionEntry()" [disabled]="isAddingOpinion">
             Close
-          </div>
+          </button>
         </form>
       </div>
     </div>

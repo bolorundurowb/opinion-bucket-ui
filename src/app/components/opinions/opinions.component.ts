@@ -24,8 +24,10 @@ export class OpinionsComponent implements OnInit {
   hasError: boolean;
   errorMessage: string;
 
-  // new comment model
-  temp: boolean;
+  // opinion data
+  title: string;
+  content: string;
+  isAddingOpinion: boolean;
 
   constructor(private opinionsService: OpinionsService,
               private router: Router,
@@ -103,5 +105,15 @@ export class OpinionsComponent implements OnInit {
 
   closeNewOpinionEntry(): void {
     this.opinionEntryClosed.emit();
+  }
+
+  addOpinion(): void {
+    // show loading
+    this.isAddingOpinion = true;
+
+    // after all
+    this.title = '';
+    this.content = '';
+    // this.opinionEntryClosed.emit();
   }
 }
