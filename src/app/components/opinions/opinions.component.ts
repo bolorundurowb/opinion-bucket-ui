@@ -127,7 +127,7 @@ export class OpinionsComponent implements OnInit {
         content: this.content
       }
     )
-      .subscribe((res) => {
+      .subscribe(() => {
         this.isAddingOpinion = false;
         this.opinionEntryClosed.emit(true);
       }, (err) => {

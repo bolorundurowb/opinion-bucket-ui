@@ -58,7 +58,7 @@
     <app-opinions
       [topicId]="topic._id"
       [showEntry]="showNewComment"
-      (opinionEntryClosed)="opinionEntryClosed()"
+      (opinionEntryClosed)="opinionEntryClosed($event)"
     ></app-opinions>
   </div>
 </div>

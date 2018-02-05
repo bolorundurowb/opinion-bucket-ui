@@ -63,7 +63,25 @@ export class TopicDetailsComponent implements OnInit {
     this.showNewComment = true;
   }
 
-  opinionEntryClosed(): void {
+  opinionEntryClosed(reloadOpinions: boolean): void {
+    if (reloadOpinions) {
+      this.isLoading = true;
+
+      this.topicService.getById(this.topicId)
+        .subscribe((res) => {
+          // remove the loader
+          this.isLoading = false;
+
+          // bind data to display elements
+          this.topic = res;
+        }, (err) => {
+          // remove the loader
+          this.isLoading = false;
+
+          // display the error message
+          this.handleErrors(err);
+        });
+    }
     this.showNewComment = false;
   }
 }
