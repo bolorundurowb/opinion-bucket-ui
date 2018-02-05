@@ -18,6 +18,7 @@ export class TopicDetailsComponent implements OnInit {
 
   // display data
   topic: any;
+  showNewComment: boolean;
 
   constructor (
     private route: ActivatedRoute,
@@ -56,5 +57,9 @@ export class TopicDetailsComponent implements OnInit {
       this.hasError = true;
       this.errorMessage = err.error.message || err.message;
     }
+  }
+
+  showNewCommentInterface(): void {
+    this.showNewComment = !this.showNewComment;
   }
 }

@@ -21,9 +21,9 @@
   </div>
 
   <div class="ui feed" *ngIf="!isLoading && opinions.length > 0">
-    <div class="event">
+    <div class="event" *ngIf="showEntry || temp">
       <div class="label">
-        <img src="">
+        <img [src]="getCurrentUserPhoto()">
       </div>
       <div class="content">
         <form class="ui reply form">
@@ -35,7 +35,7 @@
           <div class="tiny ui teal submit button">
             Add
           </div>
-          <div class="tiny ui button">
+          <div class="tiny ui button" (click)="closeNewOpinionEntry()">
             Close
           </div>
         </form>

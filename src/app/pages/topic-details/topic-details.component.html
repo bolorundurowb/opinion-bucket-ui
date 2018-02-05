@@ -47,7 +47,7 @@
 
     </div>
     <div class="column">
-      <button class="tiny ui labeled icon teal basic button add-opinion">
+      <button class="tiny ui labeled icon teal basic button add-opinion" (click)="showNewCommentInterface()">
         <i class="add icon"></i>
         New Opinion
       </button>
@@ -57,6 +57,7 @@
   <div *ngIf="!isLoading && topic" class="opinions">
     <app-opinions
       [topicId]="topic._id"
+      [showEntry]="showNewComment"
     ></app-opinions>
   </div>
 </div>

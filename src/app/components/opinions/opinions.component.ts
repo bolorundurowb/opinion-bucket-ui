@@ -2,16 +2,18 @@ import {Component, Input, OnInit} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-opinions',
   templateUrl: './opinions.component.html',
   styleUrls: ['./opinions.component.scss'],
-  providers: [OpinionsService]
+  providers: [OpinionsService, AuthService]
 })
 export class OpinionsComponent implements OnInit {
   // inputs
   @Input() topicId: string;
+  @Input() showEntry: boolean;
 
   // data models
   opinions: Array<any>;
@@ -19,8 +21,12 @@ export class OpinionsComponent implements OnInit {
   hasError: boolean;
   errorMessage: string;
 
+  // new comment model
+  temp: boolean;
+
   constructor(private opinionsService: OpinionsService,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -85,5 +91,17 @@ export class OpinionsComponent implements OnInit {
 
     // display the error
     this.errorMessage = err.error.message || err.message;
+  }
+
+  getCurrentUserPhoto(): string {
+    const user = this.authService.retrieveUser();
+    if (user) {
+      return user.profilePhoto;
+    }
+    return '';
+  }
+
+  closeNewOpinionEntry(): void {
+    this.temp = !this.temp;
   }
 }
