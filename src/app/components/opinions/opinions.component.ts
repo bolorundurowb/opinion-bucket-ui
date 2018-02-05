@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
@@ -14,6 +14,9 @@ export class OpinionsComponent implements OnInit {
   // inputs
   @Input() topicId: string;
   @Input() showEntry: boolean;
+
+  // outputs
+  @Output() opinionEntryClosed = new EventEmitter();
 
   // data models
   opinions: Array<any>;
@@ -95,13 +98,10 @@ export class OpinionsComponent implements OnInit {
 
   getCurrentUserPhoto(): string {
     const user = this.authService.retrieveUser();
-    if (user) {
-      return user.profilePhoto;
-    }
-    return '';
+    return this.getProfilePhoto({author: user});
   }
 
   closeNewOpinionEntry(): void {
-    this.temp = !this.temp;
+    this.opinionEntryClosed.emit();
   }
 }

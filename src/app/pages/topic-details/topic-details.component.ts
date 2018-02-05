@@ -60,6 +60,10 @@ export class TopicDetailsComponent implements OnInit {
   }
 
   showNewCommentInterface(): void {
-    this.showNewComment = !this.showNewComment;
+    this.showNewComment = true;
+  }
+
+  opinionEntryClosed(): void {
+    this.showNewComment = false;
   }
 }
