@@ -129,15 +129,14 @@ export class OpinionsComponent implements OnInit {
     )
       .subscribe(() => {
         this.isAddingOpinion = false;
+
+        // after all
+        this.title = '';
+        this.content = '';
         this.opinionEntryClosed.emit(true);
       }, (err) => {
         this.hasError = true;
         this.errorMessage = err.error.message || err.message;
       });
-
-    // after all
-    this.title = '';
-    this.content = '';
-    this.opinionEntryClosed.emit(true);
   }
 }
