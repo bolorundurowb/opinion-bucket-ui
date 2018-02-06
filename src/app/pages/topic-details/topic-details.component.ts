@@ -84,4 +84,18 @@ export class TopicDetailsComponent implements OnInit {
     }
     this.showNewComment = false;
   }
+
+  getProfilePhoto(topic: any): string {
+    console.log(this.topic);
+    // set the new profile photo
+    if (topic.author.profilePhoto) {
+      return topic.auth.profilePhoto
+    } else if (topic.author.gender === 'Female') {
+      return './../../../assets/avatars/female.jpg';
+    } else if (topic.author.gender === 'Male') {
+      return './../../../assets/avatars/male.jpg'
+    } else {
+      return './../../../assets/avatars/decline.jpg';
+    }
+  }
 }

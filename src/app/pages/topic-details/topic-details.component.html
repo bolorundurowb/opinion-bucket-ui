@@ -28,6 +28,7 @@
             <span class="cinema">{{topic.date | date: 'medium'}}</span>
           </div>
           <div class="description">
+            <img class="ui small right floated image" [src]="getProfilePhoto(topic)">
             <p>{{topic.content}}</p>
           </div>
           <div class="extra">
