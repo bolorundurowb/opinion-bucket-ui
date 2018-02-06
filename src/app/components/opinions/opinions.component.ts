@@ -1,17 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OpinionsService} from '../../services/opinions.service';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-opinions',
   templateUrl: './opinions.component.html',
   styleUrls: ['./opinions.component.scss'],
-  providers: [OpinionsService]
+  providers: [OpinionsService, AuthService]
 })
 export class OpinionsComponent implements OnInit {
   // inputs
   @Input() topicId: string;
+  @Input() showEntry: boolean;
+
+  // outputs
+  @Output() opinionEntryClosed = new EventEmitter<boolean>();
 
   // data models
   opinions: Array<any>;
@@ -19,8 +24,15 @@ export class OpinionsComponent implements OnInit {
   hasError: boolean;
   errorMessage: string;
 
+  // opinion data
+  title: string;
+  content: string;
+  isAddingOpinion: boolean;
+  showNewOpinionTitleError: boolean;
+
   constructor(private opinionsService: OpinionsService,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -85,5 +97,46 @@ export class OpinionsComponent implements OnInit {
 
     // display the error
     this.errorMessage = err.error.message || err.message;
+  }
+
+  getCurrentUserPhoto(): string {
+    const user = this.authService.retrieveUser();
+    return this.getProfilePhoto({author: user});
+  }
+
+  closeNewOpinionEntry(): void {
+    this.opinionEntryClosed.emit(false);
+  }
+
+  addOpinion(): void {
+    // show loading
+    this.isAddingOpinion = true;
+    this.showNewOpinionTitleError = false;
+    this.hasError = false;
+
+    if (!this.title) {
+      this.isAddingOpinion = false;
+      this.showNewOpinionTitleError = true;
+      return;
+    }
+
+    this.opinionsService.createOpinion(
+      this.topicId,
+      {
+        title: this.title,
+        content: this.content
+      }
+    )
+      .subscribe(() => {
+        this.isAddingOpinion = false;
+
+        // after all
+        this.title = '';
+        this.content = '';
+        this.opinionEntryClosed.emit(true);
+      }, (err) => {
+        this.hasError = true;
+        this.errorMessage = err.error.message || err.message;
+      });
   }
 }
